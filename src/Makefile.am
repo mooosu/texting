@@ -1,11 +1,11 @@
-SOURCES=zstring.cc zstrip.cc unicode.cc
+SOURCES=zstring.cc zstrip.cc unicode.cc zscws.cc
 if SHARED
 shareddir = lib
 shared_PROGRAMS = libztexting.so
 libztexting_so_SOURCES = $(SOURCES)
 libztexting_so_CXXFLAGS = $(SHARED_CXXFLAGS)
 libztexting_so_LDFLAGS = $(SHARED_LDFLAGS)
-libztexting_so_LDADD=-lpcre -lpcre++ 
+libztexting_so_LDADD=-lpcre -lpcre++ -lscws
 endif
 
 if STATIC

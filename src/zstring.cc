@@ -32,35 +32,13 @@ vector<term> zstring::split_by_re(const char* re) const {
 }
 
 
-string zstring::get_text() const {
-     return m_text;
-}
-
-
 string zstring::strip() const {
-     return reg_rstrip.replace(reg_lstrip.replace(m_text, ""), "");
+     return reg_right_strip.replace(reg_left_strip.replace(m_text, ""), "");
 }
 
 
 vector<string> zstring::split() const {
-     Pcre reg("[\\s\\t\\r\\n]+");
-     return reg.split(strip());
-}
-
-
-vector<string> zstring::cws(scws_t &scws) const {
-    vector<string> ret;
-    scws_res_t res,cur;
-    const char *text = m_text.c_str();
-    scws_send_text(scws, text, m_text.length());
-    while (res = cur = scws_get_result(scws)) {
-        while (cur != NULL) {
-            ret.push_back( string( text + cur->off ) );
-            cur = cur->next;
-        }
-        scws_free_result(res);
-    }
-    return ret;
+     return reg_split_default.split(strip());
 }
 
 

@@ -30,8 +30,9 @@ namespace zxlib{
           _term(string text, TermType type) :term_text(text), term_type(type){};
      } term;
 
-     static Pcre reg_lstrip = Pcre("(^[\\s\\t\\r\\n]+)");
-     static Pcre reg_rstrip = Pcre("([\\s\\t\\r\\n]+$)");
+     static Pcre reg_left_strip    = Pcre("(^[\\s\\t\\r\\n]+)");
+     static Pcre reg_right_strip   = Pcre("([\\s\\t\\r\\n]+$)");
+     static Pcre reg_split_default = Pcre("[\\s\\t\\r\\n]+");
 
      class zstring{
           private:
@@ -40,7 +41,6 @@ namespace zxlib{
                zstring(){};
                zstring(const char* text):m_text(text){};
                zstring(string text):m_text(text){};
-               string get_text() const;
 
                vector<term> split_by_re(const char* re) const;
                vector<term> split_by_re(Pcre &reg) const;
@@ -48,8 +48,6 @@ namespace zxlib{
                string strip() const;
                vector<string> split() const;
                string join(const vector<string> &vec) const;
-
-               vector<string> cws(scws_t &scws) const;
      };
 };
 
