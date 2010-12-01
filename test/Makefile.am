@@ -1,6 +1,6 @@
 bin_PROGRAMS = zstring_test
 zstring_test_SOURCES = zstring_test.cc
-zstring_test_CXXFLAGS= -I../src -O0 -ggdb3 -L../src
+zstring_test_CXXFLAGS= -I../src -O0 -ggdb3 -L../src -L/usr/local/lib
 
 if SHARED
 ZTEXTING_LIB= -lztexting
@@ -9,4 +9,4 @@ endif
 if STATIC
 ZTEXTING_LIB= ../src/libztexting.a
 endif
-zstring_test_LDADD=-lboost_unit_test_framework $(ZTEXTING_LIB)
+zstring_test_LDADD=-lpcre -lpcre++ -lboost_unit_test_framework $(ZTEXTING_LIB)

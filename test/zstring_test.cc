@@ -41,10 +41,10 @@ BOOST_FIXTURE_TEST_SUITE(mytest, zstring_test);
 
 BOOST_AUTO_TEST_CASE(SplitTextByRe)
 {
-     zstring str;
+     zstring str(m_text);
      BOOST_REQUIRE(true);   // Stop here if it fails.
      const char* strs[]={"台式机","250G","硬盘4G内存21.5英寸液晶显示器"};
-     test_split_by_re(str,"250G",3,strs);
+     test_split_by_re(str,"(250G)",3,strs);
      //BOOST_CHECK_THROW(foo.Save(nullptr), exception);
 }
 BOOST_AUTO_TEST_SUITE_END();

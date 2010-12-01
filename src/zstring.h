@@ -2,7 +2,9 @@
 #define _ZSTRING_H_
 #include <string>
 #include <vector>
+#include <pcre++.h>
 using namespace std;
+using namespace pcrepp;
 namespace zxlib{
      class zstring{
           private:
