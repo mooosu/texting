@@ -9,13 +9,13 @@
 using namespace std;
 
 namespace zxlib{
-     class scws{
+     class zscws{
           private:
                scws_t m_scws_handler;
           public:
-               scws();
-               scws(const char *charset, const char *dict, int mode);
-               ~scws();
+               zscws();
+               zscws(const char *charset, const char *dict, int mode);
+               ~zscws();
                void set_charset(const char *charset);
                void set_dict(const char *dict, int mode);
                vector<string> cws(const char *text);
