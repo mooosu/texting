@@ -8,12 +8,13 @@ using namespace zxlib;
 
 struct zscws_test
 {
-     scws test_scws;
+     zscws test_scws;
      zscws_test(){
-          const char *charset = "UTF-8";
-          const char *dict = "/home/xuyu/zhaoia_work/zhaolibs/dictlab/dict.short.xdb";
+          const char *charset = "utf8";
+          const char *dict = "/sourcecode/git_new/zhaolibs/dictlab/dict.short.xdb";
           int mode = SCWS_XDICT_XDB;
-          test_scws = scws(charset, dict, mode);
+          test_scws.set_charset(charset);
+          test_scws.set_dict( dict, mode);
      }
 
      void test_cws(const char *text, size_t size, const char **expected)
@@ -32,14 +33,12 @@ struct zscws_test
 BOOST_FIXTURE_TEST_SUITE(mytest, zscws_test);
 
 // test cws
-/*
 BOOST_AUTO_TEST_CASE(Cws)
 {
      BOOST_REQUIRE(true);   // Stop here if it fails.
      const char* strs[]={"有人","的","地方","就有","江湖"};
      test_cws("有人的地方就有江湖", 5, strs);
 }
-*/
 
 BOOST_AUTO_TEST_SUITE_END();
 
