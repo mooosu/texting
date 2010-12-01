@@ -9,4 +9,4 @@ endif
 if STATIC
 ZTEXTING_LIB= ../src/libztexting.a
 endif
-zstring_test_LDADD=-lpcre -lpcre++ -lboost_unit_test_framework $(ZTEXTING_LIB)
+zstring_test_LDADD= -lscws -lpcre -lpcre++ -lboost_unit_test_framework $(ZTEXTING_LIB)
