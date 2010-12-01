@@ -25,7 +25,7 @@ vector<string> scws::cws(const char *text){
      scws_send_text(m_scws_handler, text, strlen(text));
      while (res = cur = scws_get_result(m_scws_handler)) {
           while (cur != NULL) {
-               ret.push_back( string( text + cur->off ) );
+               ret.push_back( string(text, cur->off, cur->len) );
                cur = cur->next;
           }
           scws_free_result(res);
