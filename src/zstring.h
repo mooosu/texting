@@ -24,6 +24,8 @@ namespace zxlib{
                vector<string> split() const;
                string join(const vector<string> &vec) const;
                vector<term> cws_all(zpcre &unit, zpcre &rm, zscws &zs);
+               string to_string(){return m_text;}
+               zstring to_norm();
      };
 };
 

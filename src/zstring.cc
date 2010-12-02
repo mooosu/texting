@@ -84,6 +84,14 @@ vector<term> zstring::cws_all(zpcre &unit, zpcre &rm, zscws &zs){
      }
      return terms;
 }
+zstring zstring::to_norm()
+{
+     char* tmp = znorm((char*)m_text.c_str(),m_text.size());
+     zstring ret(tmp);
+     // 
+     free(tmp);
+     return ret;
+}
 /*
  * vim:ts=5:sw=5:
  */
