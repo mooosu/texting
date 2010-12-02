@@ -79,6 +79,10 @@ BOOST_AUTO_TEST_CASE(Split)
      zstring str("\n     台式机 250G    硬盘 4G 内存\r\n21 . 5 英寸液晶显示器    \r\n");
      const char* strs[]={"台式机","250G","硬盘","4G","内存","21",".","5","英寸液晶显示器"};
      test_split(str,9,strs);
+
+     zstring str1("\n     台式机 250G    硬盘 4G 内存\r\n21 . 5 英寸液晶显示器    \r\n");
+     const char* strs1[]={"台式机","250G","硬盘","4G","内存","21.5","英寸","液晶显示器"};
+     test_split(str1,sizeof(strs1)/sizeof(char*),strs);
 }
 
 // test join string array

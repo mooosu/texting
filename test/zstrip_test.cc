@@ -16,8 +16,18 @@ BOOST_AUTO_TEST_CASE(is_space)
 }
 BOOST_AUTO_TEST_CASE(test_zltrim)
 {
-     const char* str1 = "  1231231";
-     BOOST_CHECK_EQUAL(string(zltrim((char*)str1,strlen(str1))),string("1231231"));
+     test_data cases[]={
+          {"1231231","1231231"},
+          {" 1231231","1231231"},
+          {"  1231231","1231231"},
+          {"   1231231","1231231"},
+          {"    12   31231","12   31231"},
+     };
+     
+     for( size_t i =0 ; i < sizeof(cases) / sizeof(test_data ) ; i ++ ){
+          char* tmp = (char*)cases[i].value;
+          BOOST_CHECK_EQUAL(string(zltrim(tmp,strlen(tmp))),string(cases[i].expected));
+     }
 }
 BOOST_AUTO_TEST_CASE(test_zrtrim)
 {
