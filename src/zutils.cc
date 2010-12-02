@@ -23,7 +23,7 @@ unsigned char zxlib::dbc_utf8( unsigned char *sbc , size_t len)
      }
      return ch;
 }
-char* zxlib::znorm(char* str, size_t len )
+char* zxlib::znorm(const char* str, size_t len )
 {
      /*
       * 0x4e00 =>'\xe4\xb8\x80' => "\344\270\200"

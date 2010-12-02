@@ -17,10 +17,11 @@ void zscws::set_charset(const char *charset){
      scws_set_charset(m_scws_handler, charset);
 }
 void zscws::set_dict(const char *dict, int mode){
-
      m_dict = dict;
      m_mode = mode;
-     scws_set_dict(m_scws_handler, dict, mode);
+     if (scws_set_dict(m_scws_handler, dict, mode) != 0){
+          throw "Set dict fail!";
+     }
 }
 vector<string> zscws::cws(const char *text){
      vector<string> ret;

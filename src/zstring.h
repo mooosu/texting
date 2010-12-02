@@ -1,39 +1,14 @@
 #ifndef _ZSTRING_H_
 #define _ZSTRING_H_
 
-#include <string>
-#include <vector>
-#include <pcre++.h>
-#include <scws.h>
+#include "zutils.h"
+#include "zstrip.h"
+#include "zscws.h"
+#include "zpcre.h"
 
 using namespace std;
-using namespace pcrepp;
 
 namespace zxlib{
-
-     typedef enum {
-          Unknow = 0xff00,
-          Unit = 1,
-          En   = 2,
-          Cn   = 4,
-          Brand= 8,
-          Category = 16,
-          Number = 32
-     } TermType;
-
-     typedef struct _term {
-          string term_text;
-          TermType term_type;
-
-          _term() :term_type(Unknow){};
-          _term(string text) :term_text(text),term_type(Unknow){};
-          _term(string text, TermType type) :term_text(text), term_type(type){};
-     } term;
-
-     static Pcre reg_left_strip    = Pcre("(^[\\s\\t\\r\\n]+)");
-     static Pcre reg_right_strip   = Pcre("([\\s\\t\\r\\n]+$)");
-     static Pcre reg_split_default = Pcre("[\\s\\t\\r\\n]+");
-
      class zstring{
           private:
                string m_text;
@@ -42,12 +17,13 @@ namespace zxlib{
                zstring(const char* text):m_text(text){};
                zstring(string text):m_text(text){};
 
-               vector<term> split_by_re(const char* re) const;
-               vector<term> split_by_re(Pcre &reg) const;
+               //vector<term> split_by_re(const char* re, TermType type=Unknow) const;
+               //vector<term> split_by_re(Pcre &reg, TermType type=Unknow) const;
 
                string strip() const;
                vector<string> split() const;
                string join(const vector<string> &vec) const;
+               vector<term> cws_all(zpcre &unit, zpcre &rm, zscws &zs);
      };
 };
 
