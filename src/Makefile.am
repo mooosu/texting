@@ -1,4 +1,4 @@
-SOURCES=zstring.cc zstrip.cc unicode.cc zscws.cc
+SOURCES=zstring.cc zstrip.cc unicode.cc zscws.cc zutils.cc
 if SHARED
 shareddir = lib
 shared_PROGRAMS = libztexting.so

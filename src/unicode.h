@@ -21,6 +21,7 @@ namespace zxlib{
      inline bool bad_cont(unsigned char ch) { return (ch & 0xc0) != 0x80; }
 
      unsigned calculate_sequence_length( const unsigned char* str,const unsigned char* end);
+     unsigned calculate_sequence_length( const unsigned char* str,size_t len);
      /** An iterator which returns Unicode character values from a UTF-8 encoded
       *  string.
       */

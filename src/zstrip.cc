@@ -1,9 +1,5 @@
 #include "zstrip.h"
 #include <iostream>
-#define ZIS_SPACE_2( s ) \
-     (( s[0] == 0xc2 ) && (s[1] == 0xa0 ) )
-#define ZIS_SPACE_3( s ) \
-     (strncmp((char*)s,"\343\200\200",3) == 0 )
 
 bool zis_space(const char* s , size_t seqlen ){
      bool ret = false;

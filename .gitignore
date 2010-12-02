@@ -1,0 +1,7 @@
+*.o
+*.Po
+*.a
+*.so
+*.swp
+*.in
+config.*

@@ -1,6 +1,10 @@
 #include "unicode.h"
 using namespace zxlib;
 namespace zxlib{
+     unsigned calculate_sequence_length( const unsigned char* str,size_t len)
+     {
+          return calculate_sequence_length(str,str+len);
+     }
      unsigned calculate_sequence_length( const unsigned char* str,const unsigned char* end)
      {
           // Handle invalid UTF-8, overlong sequences, and truncated sequences as

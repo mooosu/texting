@@ -5,6 +5,7 @@
 #include<ctype.h>
 #include<cstring>
 #include "unicode.h"
+#include "zutils.h"
 
 bool zis_space(const char* s , size_t seqlen );
 char* zltrim( char* str , size_t len );
