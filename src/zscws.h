@@ -8,8 +8,8 @@ namespace zxlib{
                std::string m_dict;
                std::string m_charset;
                int m_mode;
-               zscws(zscws& other){}
-               zscws& operator=(const zscws &){}
+               zscws(zscws& other);
+               zscws& operator=(const zscws &);
 
           public:
                zscws();

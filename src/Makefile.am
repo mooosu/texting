@@ -1,6 +1,8 @@
 SOURCES=zstring.cc zstrip.cc unicode.cc zscws.cc zpcre.cc zutils.cc
 LIBS=-lpcre -lpcre++ -lscws -lyaml-cpp
 CXXFLAGS=-I/usr/local/include -L/usr/local/lib  -O0 -ggdb3 
+
+includedir = $(prefix)/include/texting
 include_HEADERS=*.h
 if SHARED
 shareddir = lib
