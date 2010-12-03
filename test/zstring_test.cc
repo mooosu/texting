@@ -31,9 +31,9 @@ struct zstring_test
           string ret = zp.replace(piece, with);
           BOOST_CHECK( ret == expected );
      }
-     void test_cws_all(zscws &zs, const string &text, vector<pair<zpcre, TermType> > &zps, zpcre &rm){
+     void test_cws_all(zscws &zs, const string &text, zpcre &rm, vector<pair<zpcre, TermType> > &zps){
           zstring zstr(text);
-          vector<term> ret = zstr.cws_all(zs, zps, rm);
+          vector<term> ret = zstr.cws_all(zs, rm, zps);
           for (vector<term>::iterator i = ret.begin(); i != ret.end(); i++){
                //cout << i->term_text << " " << i->term_type << endl;
           }
@@ -76,10 +76,14 @@ BOOST_AUTO_TEST_CASE(ZscwsAll)
      zs.set_dict( dict, mode);
      zs.set_ignore(true);
      const string text = "　100　毫升…台式机250G硬盘4G内存21.5英寸30米液晶3.06GHz显示器";
+     zpcre filter, unit, en;
+     filter.load_file("./src/symbolfilter.txt");
+     unit.load_file("./src/unit.txt");
+     en.load_file("./src/en.txt");
      vector<pair<zpcre, TermType> > zps;
-     zps.push_back( pair<zpcre, TermType>(UnitExt, Unit) );
-     zps.push_back( pair<zpcre, TermType>(EnExt, En) );
-     test_cws_all(zs,text, zps, SymbolFilter);
+     zps.push_back( pair<zpcre, TermType>(unit, Unit) );
+     zps.push_back( pair<zpcre, TermType>(en, En) );
+     test_cws_all(zs,text,filter, zps);
 }
 
 BOOST_AUTO_TEST_SUITE_END();

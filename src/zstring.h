@@ -4,13 +4,14 @@
 #include<stdio.h>
 #include<cstring>
 #include<stdlib.h>
+#include<string>
+#include<vector>
 #include<map>
 
 #include <pcre++.h>
 #include <scws.h>
 
 #include "ztype.h"
-#include "zterm.h"
 #include "unicode.h"
 #include "zstrip.h"
 #include "zutils.h"
@@ -30,12 +31,12 @@ namespace zxlib{
                zstring(const char* text):m_text(text){};
                zstring(string text):m_text(text){};
 
-               zstring to_norm() const;
+               zstring to_norm(zpcre &filter) const;
                zstring strip() const;
                string join(const string_array &vec) const;
                term_array split_by_regexp(zpcre &zp, const string &str, TermType type = Matched) const;
                term_array split_by_regexp(zpcre &zp, TermType type = Matched) const;
-               term_array cws_all(zscws &zs,vector<zpcre_type_pair> &zps, zpcre &rm);
+               term_array cws_all(zscws &zs, zpcre &filter, vector<zpcre_type_pair> &zps);
                string to_string(){return m_text;}
      };
 

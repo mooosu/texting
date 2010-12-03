@@ -2,11 +2,11 @@
 
 using namespace zxlib;
 
-zstring zstring::to_norm() const {
+zstring zstring::to_norm(zpcre &filter) const {
      char* tmp = znorm(m_text.c_str(), m_text.size());
      zstring ret(tmp);
      free(tmp);
-     return zstring( SymbolFilter.replace(ret.to_string(), " ") ).strip();
+     return zstring( filter.replace(ret.to_string(), " ") ).strip();
 }
 zstring zstring::strip() const {
      char* tmp = ztrim(m_text.c_str(), m_text.size());
@@ -39,10 +39,10 @@ term_array zstring::split_by_regexp(zpcre &zp, TermType type) const{
      term_array terms = zp.split(m_text, type);
      return terms;
 }
-term_array zstring::cws_all(zscws &zs, vector<zpcre_type_pair> &zps, zpcre &rm){
+term_array zstring::cws_all(zscws &zs, zpcre &filter, vector<zpcre_type_pair> &zps){
      term_array terms;
      zstring whitespace(" ");
-     string tmp_str = to_norm().to_string();
+     string tmp_str = to_norm(filter).to_string();
      for (size_t i = 0; i < zps.size(); i++){
           string_array unknown;
           zpcre_type_pair *item = &(zps[i]);
@@ -56,7 +56,7 @@ term_array zstring::cws_all(zscws &zs, vector<zpcre_type_pair> &zps, zpcre &rm){
           }
           tmp_str = whitespace.join(unknown);
      }
-     string_array cwsed = zs.cws( rm.replace(tmp_str, " ") );
+     string_array cwsed = zs.cws( tmp_str );
      for (size_t i = 0; i < cwsed.size(); i++){
           terms.push_back(term(cwsed[i], Cn));
      }

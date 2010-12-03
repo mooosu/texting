@@ -48,6 +48,17 @@ bool zpcre::match(const string &str){
           return false;
      return (m_reg.matches() == 1 && m_reg.get_match_length(0) == str.length());
 }
+void zpcre::study(){
+     m_reg.study();
+}
+void zpcre::load_file(const char *filename, const char *flags){
+     string_array strs;
+     readlines(filename, strs);
+     m_expression = "(" + join(strs, "") + ")";
+     m_flags = flags;
+     m_reg = pcrepp::Pcre(m_expression, flags);
+}
+
 /*
  * vim:ts=5:sw=5:
  */

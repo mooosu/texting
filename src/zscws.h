@@ -2,7 +2,6 @@
 #define _ZSCWS_H_
 
 namespace zxlib{
-     typedef vector<std::string> string_array;
      class zscws{
           private:
                scws_t m_scws_handler;

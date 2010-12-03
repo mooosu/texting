@@ -27,14 +27,18 @@ int main(){
         */
      zscws zs("UTF-8", "/home/xuyu/zhaoia_work/zhaolibs/dictlab/dict.short.xdb", SCWS_XDICT_XDB);
      zs.set_ignore(true);
-     vector<pair<zpcre, TermType> > zps;
-     zps.push_back( pair<zpcre, TermType>(UnitExt, Unit) );
-     zps.push_back( pair<zpcre, TermType>(EnExt, En) );
+     zpcre filter, unit, en;
+     filter.load_file("symbolfilter.txt");
+     unit.load_file("unit.txt");
+     en.load_file("en.txt");
+     vector<zpcre_type_pair> zps;
+     zps.push_back( zpcre_type_pair(unit, Unit) );
+     zps.push_back( zpcre_type_pair(en, En) );
      char input_string[1024];
      vector<term> ret;
      while (true){
           cin.getline(input_string, 1024);
-          ret = zstring(input_string).cws_all(zs, zps, SymbolFilter);
+          ret = zstring(input_string).cws_all(zs, filter, zps);
           print_ret( ret );
      }
      return 0;

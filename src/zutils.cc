@@ -27,6 +27,7 @@ size_t zxlib::readlines(const char* filename, vector<string>& lines )
                lines.push_back(zrtrim(line,read));
           }
           free(line);
+          fclose(fp);
      }
      return lines.size();
 }
