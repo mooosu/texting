@@ -4,12 +4,11 @@
 #include<stdio.h>
 #include<cstring>
 #include<stdlib.h>
-#include<string>
-#include<vector>
 
 #include <pcre++.h>
 #include <scws.h>
 
+#include "ztype.h"
 #include "zterm.h"
 #include "unicode.h"
 

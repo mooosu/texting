@@ -1,6 +1,7 @@
 #include "zstring.h"
 
 using namespace std;
+using namespace zxlib;
 
 string zxlib::join(vector<string>& strs , const char* chars=" ")
 {
@@ -92,4 +93,55 @@ char* zxlib::znorm(const char* str, size_t len )
      }
      return ret;
 }
+
+size_t zxlib::find_isolate_chars(string_vector& strs , vector<string_vector>& found)
+{
+
+     string_vector tmp;
+     for( size_t i =0 ; i< strs.size(); i++ ){
+          if(strs[i].size() == 3 && calculate_sequence_length((const unsigned char*)strs[i].c_str(),strs[i].size() ) == 3 ){
+               tmp.push_back(strs[i]);
+          } else if (strs[i].size() > 3 ){
+               if( !tmp.empty()){
+                    found.push_back(tmp);
+                    tmp.clear();
+               }
+          }
+     }
+     if( !tmp.empty()){
+          found.push_back(tmp);
+     }
+     return found.size();
+}
+
+size_t zxlib::group_chars(vector<string>& strs, size_t size , string_vector& groups )
+{
+
+     size_t count = strs.size() / size ;
+     size_t remainder = strs.size() % size;
+     string tmp;
+     for( size_t i =0 ;i< count ; i++ ){
+          for( size_t k = i * size ; k < (i+1)*size ; k++ ){
+               tmp+=strs[k];
+          }
+          groups.push_back(tmp);
+          tmp.clear();
+     }
+     if ( remainder == 1){
+          if (groups.empty()){
+               groups.push_back(strs.back());
+          }else{
+               groups.back()=groups.back()+strs.back();
+          }
+     } else if( remainder > 1 ){
+          for( size_t k = strs.size()-remainder ; k < strs.size() ; k++ ){
+               tmp+=strs[k];
+          }
+          groups.push_back(tmp);
+     }
+     return groups.size();
+}
+/*
+ * vim:ts=5:sw=5:
+ */
 

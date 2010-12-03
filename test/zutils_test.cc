@@ -38,3 +38,57 @@ BOOST_AUTO_TEST_CASE(test_znorm)
      const char* n1="中文 asdfasdf英 文123汉字";
      BOOST_CHECK_EQUAL(string(n1),string(znorm((char*)n1,strlen(n1))));
 }
+BOOST_AUTO_TEST_CASE(test_find_isolate_chars)
+{
+     const char *chars[]={
+          "今天","吃","喝","睡","闹","闲","很好","醒","了","就","出去","玩玩","哈"
+     };
+     string_vector strs;
+     for( size_t i=0 ;i< sizeof(chars)/sizeof(char*);i++){
+          strs.push_back(chars[i]);
+     }
+     vector<string_vector> found;
+     BOOST_CHECK_EQUAL(zxlib::find_isolate_chars(strs,found),3);
+     BOOST_CHECK_EQUAL( zxlib::join(found[0],","),string("吃,喝,睡,闹,闲"));
+     BOOST_CHECK_EQUAL( zxlib::join(found[1],","),string("醒,了,就"));
+     BOOST_CHECK_EQUAL( zxlib::join(found[2],","),string("哈"));
+}
+BOOST_AUTO_TEST_CASE(test_group_chars)
+{
+     const char *chars[]={
+          "今天","吃","喝","睡","闹","闲","很好","醒","了","就","出去","玩玩","哈"
+     };
+     string_vector strs;
+     for( size_t i=0 ;i< sizeof(chars)/sizeof(char*);i++){
+          strs.push_back(chars[i]);
+     }
+     vector<string_vector> found;
+     BOOST_CHECK_EQUAL(zxlib::find_isolate_chars(strs,found),3);
+
+     BOOST_CHECK_EQUAL( zxlib::join(found[0],","),string("吃,喝,睡,闹,闲"));
+     BOOST_CHECK_EQUAL( zxlib::join(found[1],","),string("醒,了,就"));
+     BOOST_CHECK_EQUAL( zxlib::join(found[2],","),string("哈"));
+     string_vector groups;
+     BOOST_CHECK_EQUAL(group_chars( found[0],2,groups),2);
+     BOOST_CHECK_EQUAL(groups[0],string("吃喝"));
+     BOOST_CHECK_EQUAL(groups[1],string("睡闹闲"));
+     groups.clear();
+     BOOST_CHECK_EQUAL(group_chars( found[1],2,groups),1);
+     BOOST_CHECK_EQUAL(groups[0],string("醒了就"));
+     groups.clear();
+     BOOST_CHECK_EQUAL(group_chars( found[2],2,groups),1);
+     BOOST_CHECK_EQUAL(groups[0],string("哈"));
+     groups.clear();
+
+
+     //3
+     BOOST_CHECK_EQUAL(group_chars( found[0],3,groups),2);
+     BOOST_CHECK_EQUAL(groups[0],string("吃喝睡"));
+     BOOST_CHECK_EQUAL(groups[1],string("闹闲"));
+     groups.clear();
+     BOOST_CHECK_EQUAL(group_chars( found[1],3,groups),1);
+     BOOST_CHECK_EQUAL(groups[0],string("醒了就"));
+     groups.clear();
+     BOOST_CHECK_EQUAL(group_chars( found[2],3,groups),1);
+     BOOST_CHECK_EQUAL(groups[0],string("哈"));
+}

@@ -1,4 +1,5 @@
 SOURCES=zstring.cc zstrip.cc unicode.cc zscws.cc zpcre.cc zutils.cc
+include_HEADERS=*.h
 if SHARED
 shareddir = lib
 shared_PROGRAMS = libztexting.so
