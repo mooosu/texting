@@ -1,6 +1,6 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include "stdio.h"
+#include <iostream>
 #include "zstring.h"
 
 using namespace std;

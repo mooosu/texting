@@ -1,10 +1,6 @@
 #ifndef _ZPCRE_H_
 #define _ZPCRE_H_
 
-#include <string>
-#include <vector>
-#include <pcre++.h>
-#include "zterm.h"
 
 using namespace std;
 using namespace pcrepp;

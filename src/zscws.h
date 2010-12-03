@@ -1,10 +1,6 @@
 #ifndef _ZSCWS_H_
 #define _ZSCWS_H_
 
-#include <vector>
-#include <string>
-#include <cstring>
-#include <scws.h>
 
 using namespace std;
 

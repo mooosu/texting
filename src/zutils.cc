@@ -1,4 +1,34 @@
-#include "zutils.h"
+#include "zstring.h"
+
+using namespace std;
+
+string zxlib::join(vector<string>& strs , const char* chars=" ")
+{
+     size_t i = 0;
+     size_t len = strs.size();
+     string tmp;
+     for( ; i< len-1; i++ ){
+          tmp += strs[i]+chars;
+     }
+     tmp += strs[i];
+     return tmp;
+}
+size_t zxlib::readlines(const char* filename, vector<string>& lines )
+{
+     FILE *fp;
+     char *line = NULL;
+     size_t len = 0;
+     ssize_t read;
+
+     fp = fopen(filename, "r");
+     if (fp){
+          while ((read = getline(&line, &len, fp)) != -1) {
+               lines.push_back(zrtrim(line,read));
+          }
+          free(line);
+     }
+     return lines.size();
+}
 unsigned char zxlib::dbc_utf8( unsigned char *sbc , size_t len)
 {
      unsigned char ch=0 ;

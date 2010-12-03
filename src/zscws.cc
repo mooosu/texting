@@ -1,4 +1,5 @@
-#include "zscws.h"
+#include "zstring.h"
+
 using namespace zxlib;
 
 zscws::zscws():m_mode(0){

@@ -1,8 +1,20 @@
 #ifndef _ZSTRING_H_
 #define _ZSTRING_H_
 
-#include "zutils.h"
+#include<stdio.h>
+#include<cstring>
+#include<stdlib.h>
+#include<string>
+#include<vector>
+
+#include <pcre++.h>
+#include <scws.h>
+
+#include "zterm.h"
+#include "unicode.h"
+
 #include "zstrip.h"
+#include "zutils.h"
 #include "zscws.h"
 #include "zpcre.h"
 

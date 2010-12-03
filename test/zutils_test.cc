@@ -1,7 +1,7 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 #include <iostream>
-#include "zutils.h"
+#include "zstring.h"
 
 using namespace std;
 using namespace zxlib;

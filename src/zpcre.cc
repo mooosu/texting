@@ -1,4 +1,4 @@
-#include "zpcre.h"
+#include "zstring.h"
 
 using namespace zxlib;
 
