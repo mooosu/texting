@@ -1,15 +1,13 @@
 #ifndef _ZSCWS_H_
 #define _ZSCWS_H_
 
-
-using namespace std;
-
 namespace zxlib{
+     typedef vector<std::string> string_array;
      class zscws{
           private:
                scws_t m_scws_handler;
-               string m_dict;
-               string m_charset;
+               std::string m_dict;
+               std::string m_charset;
                int m_mode;
                zscws(zscws& other){}
                zscws& operator=(const zscws &){}
@@ -20,7 +18,9 @@ namespace zxlib{
                ~zscws();
                void set_charset(const char *charset);
                void set_dict(const char *dict, int mode);
-               vector<string> cws(const char *text);
+               void set_ignore(bool yes);
+               string_array cws(const char *text);
+               string_array cws(const std::string &text);
      };
 };
 #endif

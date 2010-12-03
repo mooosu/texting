@@ -1,6 +1,6 @@
 #include "zstring.h"
 
-bool zis_space(const char* s , size_t seqlen ){
+bool zxlib::zis_space(const char* s , size_t seqlen ){
      bool ret = false;
      if ( seqlen == 3 && ZIS_SPACE_3( s ) ){
           ret = true;
@@ -11,7 +11,7 @@ bool zis_space(const char* s , size_t seqlen ){
      }
      return ret;
 }
-char* zltrim( char* str , size_t len ){
+char* zxlib::zltrim(const char* str , size_t len ){
      char* ret = NULL;
      if( len > 0 ) {
           unsigned char * s =(unsigned char*)(char*) str;
@@ -26,11 +26,11 @@ char* zltrim( char* str , size_t len ){
           } while(*s);
           ret =(char*) s ;
      } else {
-          ret= str;
+          ret= (char*)str;
      }
      return ret;
 }
-char* zrtrim( char* str , size_t len ){
+char* zxlib::zrtrim(const char* str , size_t len ){
      char* ret = NULL;
      if( len > 0 ) {
           unsigned char * s =(unsigned char*)(char*) str;
@@ -47,11 +47,15 @@ char* zrtrim( char* str , size_t len ){
                s+= seqlen;
           } while(s< end);
           *(end-count)=0;
-          ret = str ;
+          ret = (char*)str ;
      } else {
-          ret= str;
+          ret= (char*)str;
      }
      return ret;
+}
+char* zxlib::ztrim(const char* str, size_t len){
+     const char* ltrimed = zxlib::zltrim(str, len);
+     return zxlib::zrtrim(ltrimed, strlen(ltrimed));
 }
 /*
  * vim:ts=5:sw=5:

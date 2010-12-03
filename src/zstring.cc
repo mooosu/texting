@@ -2,48 +2,18 @@
 
 using namespace zxlib;
 
-/*
-vector<term> zstring::split_by_re(Pcre &reg, TermType type) const {
-     vector<term> splited;
-     size_t len = m_text.length();
-     size_t pos = 0, start = 0, end = 0;
-     while (pos < len) {
-          if(reg.search(m_text, pos)) {
-               start = reg.get_match_start(0);
-               end = reg.get_match_end(0);
-               if (start > pos) {
-                    splited.push_back(term(string(m_text, pos, start-pos)));
-               }
-               splited.push_back(term(reg.get_match(0), type));
-               pos = end+1;
-          } else {
-               if (pos < len) {
-                    splited.push_back(term(string(m_text, pos, len-pos)));
-               }
-               break;
-          }
-     }
-     return splited;
+zstring zstring::to_norm() const {
+     char* tmp = znorm(m_text.c_str(), m_text.size());
+     zstring ret(tmp);
+     free(tmp);
+     return zstring( SymbolFilter.replace(ret.to_string(), " ") ).strip();
+}
+zstring zstring::strip() const {
+     char* tmp = ztrim(m_text.c_str(), m_text.size());
+     return zstring(tmp);
 }
 
-
-vector<term> zstring::split_by_re(const char* re, TermType type) const {
-     Pcre reg(re);
-     return split_by_re( reg, type );
-}
-*/
-
-string zstring::strip() const {
-     return reg_right_strip.replace(reg_left_strip.replace(m_text, ""), "");
-}
-
-
-vector<string> zstring::split() const {
-     return reg_split_default.split(strip());
-}
-
-
-string zstring::join(const vector<string> & vec) const {
+string zstring::join(const string_array &vec) const {
      size_t vec_len = vec.size();
      if (vec_len == 0)
           return "";
@@ -61,36 +31,36 @@ string zstring::join(const vector<string> & vec) const {
           return tmp;
      }
 }
-vector<term> zstring::cws_all(zpcre &unit, zpcre &rm, zscws &zs){
-     vector<term> terms;
-     const char *text = m_text.c_str();
-     char *norm_text = znorm(text, strlen(text));
-     char *nl_text = zltrim(norm_text, strlen(norm_text));
-     char *nlr_text = zrtrim(nl_text, strlen(nl_text));
-     vector<term> ext_unit = unit.split(string(nlr_text));
-     vector<string> remain;
-     for (vector<term>::iterator i = ext_unit.begin(); i != ext_unit.end(); i++){
-          if (i->term_type == Matched)
-               terms.push_back(term(i->term_text, Unit));
-          else
-               remain.push_back(i->term_text);
-     }
-     free(norm_text);
-     string remain_str = zstring(" ").join(remain);
-     string send_cws_text = rm.remove(remain_str);
-     vector<string> cwsed = zs.cws(send_cws_text.c_str());
-     for (vector<string>::iterator i = cwsed.begin(); i != cwsed.end(); i++){
-          terms.push_back(term(*i, Cn));
-     }
+term_array zstring::split_by_regexp(zpcre &zp, const string &str, TermType type) const{
+     term_array terms = zp.split(str, type);
      return terms;
 }
-zstring zstring::to_norm()
-{
-     char* tmp = znorm((char*)m_text.c_str(),m_text.size());
-     zstring ret(tmp);
-     // 
-     free(tmp);
-     return ret;
+term_array zstring::split_by_regexp(zpcre &zp, TermType type) const{
+     term_array terms = zp.split(m_text, type);
+     return terms;
+}
+term_array zstring::cws_all(zscws &zs, vector<zpcre_type_pair> &zps, zpcre &rm){
+     term_array terms;
+     zstring whitespace(" ");
+     string tmp_str = to_norm().to_string();
+     for (size_t i = 0; i < zps.size(); i++){
+          string_array unknown;
+          zpcre_type_pair *item = &(zps[i]);
+          term_array tmp_terms = split_by_regexp( item->first, tmp_str, item->second );
+          for (size_t i = 0; i < tmp_terms.size(); i++){
+               term _t = tmp_terms[i];
+               if (_t.term_type == Unknown)
+                    unknown.push_back(_t.term_text);
+               else
+                    terms.push_back(_t);
+          }
+          tmp_str = whitespace.join(unknown);
+     }
+     string_array cwsed = zs.cws( rm.replace(tmp_str, " ") );
+     for (size_t i = 0; i < cwsed.size(); i++){
+          terms.push_back(term(cwsed[i], Cn));
+     }
+     return terms;
 }
 /*
  * vim:ts=5:sw=5:

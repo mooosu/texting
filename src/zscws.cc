@@ -24,8 +24,14 @@ void zscws::set_dict(const char *dict, int mode){
           throw "Set dict fail!";
      }
 }
-vector<string> zscws::cws(const char *text){
-     vector<string> ret;
+void zscws::set_ignore(bool yes){
+     if (yes)
+          scws_set_ignore(m_scws_handler, 1);
+     else
+          scws_set_ignore(m_scws_handler, 0);
+}
+string_array zscws::cws(const char *text){
+     string_array ret;
      scws_res_t res,cur;
      scws_send_text(m_scws_handler, text, strlen(text));
      while (res = cur = scws_get_result(m_scws_handler)) {
@@ -36,6 +42,9 @@ vector<string> zscws::cws(const char *text){
           scws_free_result(res);
      }
      return ret;
+}
+string_array zscws::cws(const string &text){
+     return cws(text.c_str());
 }
 /*
  * vim:ts=5:sw=5:

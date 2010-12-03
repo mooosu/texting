@@ -1,28 +1,28 @@
 #ifndef _ZTERM_H_
 #define _ZTERM_H_
 
-#include <string>
-
 namespace zxlib {
      typedef enum {
-          Unknow = 0xff00,
+          Unit = 0x01,
+          Number = 0x02,
+          En   = 0x04,
+          Cn   = 0x08,
+          Brand= 0x10,
+          Category = 0x20,
           Matched = 0xee00,
-          Unit = 1,
-          En   = 2,
-          Cn   = 4,
-          Brand= 8,
-          Category = 16,
-          Number = 32
+          Unknown = 0xff00,
      } TermType;
 
      typedef struct _term {
           std::string term_text;
           TermType term_type;
 
-          _term() :term_type(Unknow){};
-          _term(std::string text) :term_text(text),term_type(Unknow){};
+          _term() :term_type(Unknown){};
+          _term(std::string text) :term_text(text),term_type(Unknown){};
           _term(std::string text, TermType type) :term_text(text), term_type(type){};
      } term;
+
+     typedef std::vector<term> term_array;
 
 };
 
