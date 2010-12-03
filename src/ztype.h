@@ -14,5 +14,18 @@ namespace zxlib{
           Matched = 0xee00,
           Unknown = 0xff00,
      } TermType;
+     class zexception: public exception {
+          public:
+               zexception() : m_msg("exception raised from zxlib" ){}
+               zexception( const char * msg ) : m_msg(msg){}
+               zexception( string& msg ) : m_msg(msg){}
+               virtual ~zexception() throw() { }
+               virtual const char* what() const throw(){ return m_msg.c_str(); }
+          protected:
+               string m_msg;
+     };
+     typedef struct{
+          virtual void set_config( const YAML::Node&  node ) = 0;
+     }zconfig_yaml;
 }
 

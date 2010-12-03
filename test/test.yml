@@ -1,0 +1,5 @@
+- dict_path: /tmp/mydict.xdb
+  host: 192.168.1.86
+  port: 27017
+  field: atext
+  collection: count_word.download

@@ -2,6 +2,20 @@
 
 using namespace std;
 using namespace zxlib;
+void zxlib::load_yaml( const char* filename , zconfig_yaml& config )
+{
+     ifstream fin(filename);
+     YAML::Parser parser(fin);
+     YAML::Node doc;
+     parser.GetNextDocument(doc);
+     if( doc.size() > 0 ){
+          config.set_config(doc[0]);
+     } else {
+          string msg("invalid yaml:");
+          msg+=filename;
+          throw zexception(msg);
+     }
+}
 
 string zxlib::join(vector<string>& strs , const char* chars=" ")
 {

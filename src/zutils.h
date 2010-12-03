@@ -14,6 +14,7 @@ namespace zxlib{
      string join(string_vector& strs , const char* chars);
      size_t group_chars(string_vector& strs, size_t size , string_vector& groups );
      size_t find_isolate_chars(string_vector& chars, vector<string_vector>& found);
+     void load_yaml( const char* filename , zconfig_yaml& config );
 }
 
 #endif

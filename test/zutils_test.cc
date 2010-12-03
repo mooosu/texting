@@ -92,3 +92,35 @@ BOOST_AUTO_TEST_CASE(test_group_chars)
      BOOST_CHECK_EQUAL(group_chars( found[2],3,groups),1);
      BOOST_CHECK_EQUAL(groups[0],string("哈"));
 }
+BOOST_AUTO_TEST_CASE(test_load_yaml)
+{
+     struct myconfig:zconfig_yaml{
+          string dict_path;
+          string host;
+          int port;
+          string field;
+          string collection;
+          void set_config(const YAML::Node& node )
+          {
+               node["dict_path"]>> dict_path;
+               node["host"]>> host;
+               node["port"]>> port;
+               node["field"]>> field;
+               node["collection"]>> collection;
+          }
+          void inspect()
+          {
+               cout << "dict_path:" << dict_path << endl;
+               cout << "host:" << host << endl;
+               cout << "port:" << port << endl;
+               cout << "field:" << field << endl;
+               cout << "collection:" << collection << endl;
+          }
+     }cfg;
+     zxlib::load_yaml("test/test.yml",cfg);
+     BOOST_CHECK_EQUAL(cfg.dict_path,"/tmp/mydict.xdb");
+     BOOST_CHECK_EQUAL(cfg.host,"192.168.1.86");
+     BOOST_CHECK_EQUAL(cfg.port,27017);
+     BOOST_CHECK_EQUAL(cfg.field,"atext");
+     BOOST_CHECK_EQUAL(cfg.collection,"count_word.download");
+}

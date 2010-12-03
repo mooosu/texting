@@ -4,12 +4,12 @@
 #include<stdio.h>
 #include<cstring>
 #include<stdlib.h>
-#include<string>
-#include<vector>
+#include<fstream>
 #include<map>
 
 #include <pcre++.h>
 #include <scws.h>
+#include <yaml-cpp/yaml.h>
 
 #include "ztype.h"
 #include "unicode.h"
