@@ -10,6 +10,7 @@ namespace zxlib{
      using namespace std;
      unsigned char dbc_utf8( unsigned char *sbc , size_t len);
      char* znorm(const char* str, size_t len );
+     bool file_exists(const char *filename);
      size_t readlines(const char* filename, string_vector& lines );
      string join(string_vector& strs , const char* chars);
      size_t group_chars(string_vector& strs, size_t size , string_vector& groups );

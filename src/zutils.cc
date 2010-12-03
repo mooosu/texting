@@ -2,8 +2,19 @@
 
 using namespace std;
 using namespace zxlib;
+bool zxlib::file_exists(const char *filename)
+{
+     struct stat file_info;
+     if ( stat(filename, &file_info) == 0 ){
+          return true;
+     } else {
+          return false;
+     }
+}
 void zxlib::load_yaml( const char* filename , zconfig_yaml& config )
 {
+     if ( !file_exists(filename) )
+          throw "load yaml file not exists";
      ifstream fin(filename);
      YAML::Parser parser(fin);
      YAML::Node doc;

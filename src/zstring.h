@@ -4,6 +4,7 @@
 #include<stdio.h>
 #include<cstring>
 #include<stdlib.h>
+#include<sys/stat.h>
 #include<fstream>
 #include<map>
 

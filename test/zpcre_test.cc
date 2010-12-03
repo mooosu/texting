@@ -16,6 +16,6 @@ BOOST_AUTO_TEST_CASE(match)
 
 BOOST_AUTO_TEST_CASE(Remove)
 {
-    zpcre zp("([\\\\~`!@$%\\(\\)\\{\\}\\[\\]=\"';:,<>?|^]|/(?=[a-z0-9\xE4\xB8\x80-\xE9\xBE\xA5]{2,})|/$|(?<=[^a-z0-9+])\\+)","g");
+    zpcre zp("([\\\\~`!@$%\\(\\)\\{\\}\\[\\]=\"';:,<>?|^]|/(?=[a-z0-9\xE4\xB8\x80-\xE9\xBE\xA5]{2,})|/$|(?<=[^a-z0-9+])\\+)","gi");
     BOOST_CHECK_EQUAL( zp.remove("^%$@@!/"),"" );
 }

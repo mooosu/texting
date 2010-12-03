@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(test_to_norm)
      };
      char buffer[1024];
      zpcre filter;
-     filter.load_file("./src/symbolfilter.txt");
+     filter.load_file("./src/symbol.txt");
      for( size_t i =0 ; i < sizeof(cases) / sizeof(test_data ) ; i ++ ){
           char* tmp = (char*)cases[i].value;
           BOOST_CHECK_EQUAL(zstring(tmp).to_norm(filter).to_string(),string(cases[i].expected));

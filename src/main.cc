@@ -28,9 +28,12 @@ int main(){
      zscws zs("UTF-8", "/home/xuyu/zhaoia_work/zhaolibs/dictlab/dict.short.xdb", SCWS_XDICT_XDB);
      zs.set_ignore(true);
      zpcre filter, unit, en;
-     filter.load_file("symbolfilter.txt");
+     filter.load_file("symbol.txt");
      unit.load_file("unit.txt");
      en.load_file("en.txt");
+     filter.study();
+     unit.study();
+     en.study();
      vector<zpcre_type_pair> zps;
      zps.push_back( zpcre_type_pair(unit, Unit) );
      zps.push_back( zpcre_type_pair(en, En) );

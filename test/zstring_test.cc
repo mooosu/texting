@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(ZscwsAll)
      zs.set_ignore(true);
      const string text = "　100　毫升…台式机250G硬盘4G内存21.5英寸30米液晶3.06GHz显示器";
      zpcre filter, unit, en;
-     filter.load_file("./src/symbolfilter.txt");
+     filter.load_file("./src/symbol.txt");
      unit.load_file("./src/unit.txt");
      en.load_file("./src/en.txt");
      vector<pair<zpcre, TermType> > zps;

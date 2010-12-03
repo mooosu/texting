@@ -52,9 +52,15 @@ void zpcre::study(){
      m_reg.study();
 }
 void zpcre::load_file(const char *filename, const char *flags){
+     if ( !file_exists(filename) ){
+          string error_msg = "File ";
+          error_msg += filename;
+          error_msg += " Not Found";
+          throw error_msg;
+     }
      string_array strs;
      readlines(filename, strs);
-     m_expression = "(" + join(strs, "") + ")";
+     m_expression = "(" + zstring("").join(strs) + ")";
      m_flags = flags;
      m_reg = pcrepp::Pcre(m_expression, flags);
 }
