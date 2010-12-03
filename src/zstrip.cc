@@ -1,5 +1,4 @@
-#include "zstrip.h"
-#include <iostream>
+#include "zstring.h"
 
 bool zis_space(const char* s , size_t seqlen ){
      bool ret = false;
@@ -47,7 +46,6 @@ char* zrtrim( char* str , size_t len ){
                }
                s+= seqlen;
           } while(s< end);
-          std::cout << "count:" << count << std::endl;
           *(end-count)=0;
           ret = str ;
      } else {
@@ -58,3 +56,4 @@ char* zrtrim( char* str , size_t len ){
 /*
  * vim:ts=5:sw=5:
  */
+

@@ -1,6 +1,7 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
-#include "zstrip.h"
+#include <iostream>
+#include "zstring.h"
 
 using namespace std;
 using namespace zxlib;
@@ -44,3 +45,4 @@ BOOST_AUTO_TEST_CASE(test_zrtrim)
           BOOST_CHECK_EQUAL(string(zrtrim(tmp,strlen(tmp))),string(cases[i].expected));
      }
 }
+
