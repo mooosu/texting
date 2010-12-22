@@ -18,6 +18,10 @@ BOOST_AUTO_TEST_CASE(is_dbc_utf8)
      memcpy(buffer,"\xc2\xa0",3);
      BOOST_CHECK_EQUAL(zxlib::calculate_sequence_length((const unsigned char*)buffer,2),2);
 }
+BOOST_AUTO_TEST_CASE(test_calculate_sequence_length)
+{
+     BOOST_CHECK_EQUAL(zxlib::calculate_sequence_length((const unsigned char*)"ab",2),1);
+}
 BOOST_AUTO_TEST_CASE(test_znorm)
 {
      
@@ -56,7 +60,7 @@ BOOST_AUTO_TEST_CASE(test_find_isolate_chars)
 BOOST_AUTO_TEST_CASE(test_group_chars)
 {
      const char *chars[]={
-          "今天","吃","喝","睡","闹","闲","很好","醒","了","就","出去","玩玩","哈"
+          "今天","a","bcd","吃","喝","睡","闹","闲","很好","醒","了","就","出去","玩玩","哈"
      };
      string_vector strs;
      for( size_t i=0 ;i< sizeof(chars)/sizeof(char*);i++){

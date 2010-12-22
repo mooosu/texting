@@ -10,7 +10,7 @@ namespace zxlib {
           _term() :term_type(Unknown){};
           _term(std::string text) :term_text(text),term_type(Unknown){};
           _term(std::string text, TermType type) :term_text(text), term_type(type){};
-     } term;
+     } term,zterm;
 
      typedef std::vector<term> term_array;
 

@@ -34,8 +34,9 @@ struct zstring_test
      void test_cws_all(zscws &zs, const string &text, zpcre &rm, vector<pair<zpcre, TermType> > &zps){
           zstring zstr(text);
           vector<term> ret = zstr.cws_all(zs, rm, zps);
+          cout << "test_cws_all" << endl;
           for (vector<term>::iterator i = ret.begin(); i != ret.end(); i++){
-               //cout << i->term_text << " " << i->term_type << endl;
+               cout << i->term_text << " " << i->term_type << endl;
           }
      }
 };
@@ -74,7 +75,7 @@ BOOST_AUTO_TEST_CASE(ZscwsAll)
      zscws zs;
      zs.set_charset(charset);
      zs.set_dict( dict, mode);
-     zs.set_ignore(true);
+
      const string text = "　100　毫升…台式机250G硬盘4G内存21.5英寸30米液晶3.06GHz显示器";
      zpcre filter, unit, en;
      filter.load_file("./src/symbol.txt");
