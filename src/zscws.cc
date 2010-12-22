@@ -1,4 +1,4 @@
-#include "zstring.h"
+#include "ztexting.h"
 
 using namespace zxlib;
 

@@ -1,26 +1,6 @@
 #ifndef _ZSTRING_H_
 #define _ZSTRING_H_
 
-#include<stdio.h>
-#include<cstring>
-#include<stdlib.h>
-#include<sys/stat.h>
-#include<fstream>
-#include<map>
-
-#include <pcre++.h>
-#include <scws.h>
-#include <yaml-cpp/yaml.h>
-
-#include "ztype.h"
-#include "unicode.h"
-#include "zstrip.h"
-#include "zutils.h"
-
-#include "zterm.h"
-#include "zscws.h"
-#include "zpcre.h"
-
 using namespace std;
 
 namespace zxlib{
@@ -42,7 +22,6 @@ namespace zxlib{
      };
 
 };
-#include "zstmt.h"
 
 #endif
 /*

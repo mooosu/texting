@@ -1,4 +1,4 @@
-#include "zstring.h"
+#include "ztexting.h"
 
 bool zxlib::zis_space(const char* s , size_t seqlen ){
      bool ret = false;

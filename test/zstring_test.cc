@@ -2,7 +2,7 @@
 #define BOOST_TEST_MODULE zstring_test
 #include <boost/test/unit_test.hpp>
 #include <iostream>
-#include "zstring.h"
+#include "ztexting.h"
 
 using namespace std;
 using namespace zxlib;

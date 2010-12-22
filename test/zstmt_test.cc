@@ -1,7 +1,7 @@
 #define BOOST_TEST_DYN_LINK
 #include <boost/test/unit_test.hpp>
 #include <iostream>
-#include "zstring.h"
+#include "ztexting.h"
 
 using namespace std;
 using namespace zxlib;
@@ -21,6 +21,7 @@ BOOST_AUTO_TEST_CASE(test_get_terms)
      zs.set_dict( dict, mode);
 
      test_data cases[]={
+          {"包邮！销量7300台！首信 S718 老人手机 正品行货 黑色 白色","包邮:销量:7300台:首信:S718:老人:手机:正品:行货:黑色:白色"},
           {"台式机250G硬盘","台式机:250G:硬盘"}
      };
      zpcre filter, unit, en;
@@ -31,8 +32,8 @@ BOOST_AUTO_TEST_CASE(test_get_terms)
      zps.push_back( pair<zpcre, TermType>(unit, Unit) );
      zps.push_back( pair<zpcre, TermType>(en, En) );
      for( size_t i = 0 ;i< sizeof(cases)/sizeof(test_data) ; i++ ){
-          zstmt stmt( cases[i].value,zps,SubStmt);
-          stmt.parse( filter);
+          zstmt stmt( cases[i].value,SubStmt);
+          stmt.parse( filter,zps,zs);
           term_array &tas = stmt.get_terms();
           string_vector tmp;
           for( size_t n =0 ; n < tas.size(); n++){
