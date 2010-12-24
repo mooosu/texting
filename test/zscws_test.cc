@@ -11,7 +11,7 @@ struct zscws_test
      zscws test_scws;
      zscws_test(){
           const char *charset = "utf8";
-          const char *dict = "../../zhaolibs/dictlab/dict.short.xdb";
+          const char *dict = "test/test_data/dict.short.xdb";
           int mode = SCWS_XDICT_XDB;
           test_scws.set_charset(charset);
           test_scws.set_dict( dict, mode);

@@ -22,10 +22,10 @@ BOOST_AUTO_TEST_CASE(test_ztexting_init)
 {
      ztexting::init("test/test_ztexting_init.yml");
      ztexting* inst = ztexting::instance();
-     BOOST_CHECK_EQUAL(inst->dict_file(),"../../zhaolibs/dictlab/dict.short.xdb");
-     BOOST_CHECK_EQUAL(inst->symbol_file(),"../../platform/texting/src/symbol.txt");
-     BOOST_CHECK_EQUAL(inst->unit_file(),"../../platform/texting/src/unit.txt");
-     BOOST_CHECK_EQUAL(inst->en_file(),"../../platform/texting/src/en.txt");
+     BOOST_CHECK_EQUAL(inst->dict_file(),"test/test_data/dict.short.xdb");
+     BOOST_CHECK_EQUAL(inst->symbol_file(),"test/test_data/symbol.txt");
+     BOOST_CHECK_EQUAL(inst->unit_file(),"test/test_data/unit.txt");
+     BOOST_CHECK_EQUAL(inst->en_file(),"test/test_data/en.txt");
 }
 BOOST_AUTO_TEST_CASE(test_ztexting_parse_stmt)
 {

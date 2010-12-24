@@ -70,7 +70,7 @@ BOOST_AUTO_TEST_CASE(ReReplace)
 BOOST_AUTO_TEST_CASE(ZscwsAll)
 {
      const char *charset = "utf8";
-     const char *dict = "../../zhaolibs/dictlab/dict.short.xdb";
+     const char *dict = "test/test_data/dict.short.xdb";
      int mode = SCWS_XDICT_XDB;
      zscws zs;
      zs.set_charset(charset);
@@ -78,9 +78,9 @@ BOOST_AUTO_TEST_CASE(ZscwsAll)
 
      const string text = "　100　毫升…台式机250G硬盘4G内存21.5英寸30米液晶3.06GHz显示器";
      zpcre filter, unit, en;
-     filter.load_file("./src/symbol.txt");
-     unit.load_file("./src/unit.txt");
-     en.load_file("./src/en.txt");
+     filter.load_file("test/test_data/symbol.txt");
+     unit.load_file("test/test_data/unit.txt");
+     en.load_file("test/test_data/en.txt");
      vector<pair<zpcre, TermType> > zps;
      zps.push_back( pair<zpcre, TermType>(unit, Unit) );
      zps.push_back( pair<zpcre, TermType>(en, En) );

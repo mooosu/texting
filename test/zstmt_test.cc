@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_CASE(test_get_terms)
 {
 
      const char *charset = "utf8";
-     const char *dict = "../../zhaolibs/dictlab/dict.short.xdb";
+     const char *dict = "test/test_data/dict.short.xdb";
      int mode = SCWS_XDICT_XDB;
      zscws zs;
      zs.set_charset(charset);
@@ -25,9 +25,9 @@ BOOST_AUTO_TEST_CASE(test_get_terms)
           {"台式机250G硬盘","台式机:250G:硬盘"}
      };
      zpcre filter, unit, en;
-     filter.load_file("./src/symbol.txt");
-     unit.load_file("./src/unit.txt");
-     en.load_file("./src/en.txt");
+     filter.load_file("test/test_data/symbol.txt");
+     unit.load_file("test/test_data/unit.txt");
+     en.load_file("test/test_data/en.txt");
      vector<pair<zpcre, TermType> > zps;
      zps.push_back( pair<zpcre, TermType>(unit, Unit) );
      zps.push_back( pair<zpcre, TermType>(en, En) );
