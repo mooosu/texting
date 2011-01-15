@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(test_ztexting_init)
 BOOST_AUTO_TEST_CASE(test_ztexting_parse_stmt)
 {
      test_data cases[]={
-          {"Crest 佳洁士 全优7效牙刷","ddd"},
+          //{"Crest 佳洁士 全优7效牙刷","ddd"},
           {"包邮！销量7300台！首信 S718 老人手机 正品行货 黑色 白色","包邮:销量:7300台:首信:S718:老人:手机:正品:行货:黑色:白色"},
           {"台式机250G硬盘","台式机:250G:硬盘"}
      };

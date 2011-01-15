@@ -140,6 +140,67 @@ size_t zxlib::find_isolate_chars(string_vector& strs , vector<string_vector>& fo
      return found.size();
 }
 
+int char_accept( char c )
+{
+    return c !=0 && (isalnum(c) || !isspace(c));
+}
+int zxlib::join_isolated_chars( char * src ,int len, char* dest)
+{
+     int i,k=0;
+     char current_char;
+     char n1_char;
+     char pad =0;
+     int status=0;
+     unsigned char * end = (unsigned char*)(len+src);
+     int seqlen = 1;
+     for ( i = 0 ;i < len ; i++ )
+     {
+          current_char = src[i];
+          n1_char = src[i+1];
+          switch( status ){
+               case 0:/* detect alnum */
+                    if ( (seqlen = calculate_sequence_length((unsigned char*)&src[i],end)) < 2 ) {
+                         if ( char_accept(current_char) && char_accept(n1_char)) {
+                              if ( pad == ' ' ){
+                                   dest[k++]= pad;
+                                   pad =0;
+                              }
+                              for( ;char_accept(src[i]) && i< len-1 ; i++ ){
+                                   dest[k++]=src[i];
+                              }
+                              if( i != len -2 ) // for CLASS 6 => CLASS6
+                                   dest[k++]=src[i];
+                              continue;
+                         } else if (char_accept(current_char) && (isspace(n1_char) || n1_char == 0)) {
+                              if ( i != 0 ){
+                                   status = 1;
+                                   --i;
+                                   pad=' ';
+                              } else { // for a bc => abc
+                                   status = 1;
+                                   --i;
+                              }
+                         } 
+                    } else {
+                         seqlen = i+seqlen ;
+                         for( ;i < seqlen; i++){
+                              dest[k++]=src[i];
+                         }
+                         i--;
+                    }
+                    break;
+               case 1: /*detect space */
+                    dest[k++]=current_char;
+                    i+=1;
+                    status = 0;
+                    break;
+          }
+     }
+     for( k-- ; isspace(dest[k])&& k >=0;k--);
+     dest[++k]=0;
+     return k;
+}
+
 size_t zxlib::group_chars(vector<string>& strs, size_t size , string_vector& groups )
 {
 

@@ -1,4 +1,5 @@
 #define BOOST_TEST_DYN_LINK
+#define BOOST_TEST_MODULE zutils_test
 #include <boost/test/unit_test.hpp>
 #include <iostream>
 #include "ztexting.h"
@@ -127,4 +128,44 @@ BOOST_AUTO_TEST_CASE(test_load_yaml)
      BOOST_CHECK_EQUAL(cfg.port,27017);
      BOOST_CHECK_EQUAL(cfg.field,"atext");
      BOOST_CHECK_EQUAL(cfg.collection,"count_word.download");
+}
+BOOST_AUTO_TEST_CASE(test_join_isolated_chars)
+{
+     test_data cases[]={
+          {"CLASS 6","CLASS6"},
+          {"a b c","abc"},
+          {"a bc","abc"},
+          {"ab bc","ab bc"},
+          {"S PU 索浦","SPU 索浦"},
+          {"I Tech","ITech"},
+          {"CF 卡","CF 卡"},
+          {"电水壶 电水瓶","电水壶电水瓶"},
+          {"python cook","python cook"},
+          {"A-B-C","A-B-C"},
+          {"           ",""},
+          {"      1     ","1"},
+          {"     1     ","1"},
+          {"     1    ","1"},
+          {"a o sd 1 3 4 sd t y i kjk","ao sd 134 sd tyi kjk"},
+          {"a o smith","ao smith"},
+          {"dfs a o smith","dfs ao smith"},
+          {"dfs a o","dfs ao"},
+          {"AD FD dfs a o 1 3 4   smith","AD FD dfs ao134 smith"},
+          {"a o 1 3 4   smith","ao134 smith"},
+          {"AD FD dfs a o 1 3 4","AD FD dfs ao134"},
+          {"    adsf  34  a o 1 3 4      ","adsf 34 ao134"},
+          {" a o 1 3 4","ao134"},
+          {"   a o 1 3 4","ao134"},
+          {"   a o  lllll 1 3 4","ao lllll 134"},
+          {"   a o  找  呀 1 3 4  搜索  sdf3 2 d  g t","ao找呀134搜索 sdf3 2dgt"}
+     };
+     zpcre filter;
+     filter.load_file("./src/symbol.txt");
+     char buffer[1024];
+     for( size_t i =0 ; i < sizeof(cases) / sizeof(test_data ) ; i ++ ){
+          char* tmp = (char*)cases[i].value;
+          string str= tmp;
+          join_isolated_chars((char*)str.c_str(),str.size(),buffer);
+          BOOST_CHECK_EQUAL(string(buffer),string(cases[i].expected));
+     }
 }

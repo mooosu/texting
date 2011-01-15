@@ -13,6 +13,7 @@ namespace zxlib{
      bool file_exists(const char *filename);
      size_t readlines(const char* filename, string_vector& lines );
      string join(string_vector& strs , const char* chars);
+     int join_isolated_chars( char * src ,int len, char* dest);
      size_t group_chars(string_vector& strs, size_t size , string_vector& groups );
      size_t find_isolate_chars(string_vector& chars, vector<string_vector>& found);
      void load_yaml( const char* filename , zconfig_yaml& config );
