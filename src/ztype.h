@@ -1,7 +1,12 @@
+#ifndef _ZTYPE_H_
+#define _ZTYPE_H_
 #include<string>
 #include<vector>
+
+using std::string;
+using std::vector;
+using std::exception;
 namespace zxlib{
-     using namespace std;
      typedef vector<string> string_vector;
      typedef vector<string> string_array;
      typedef enum {
@@ -27,5 +32,6 @@ namespace zxlib{
      typedef struct{
           virtual void set_config( const YAML::Node&  node ) = 0;
      }zconfig_yaml;
-}
+};
+#endif
 

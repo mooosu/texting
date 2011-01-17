@@ -3,13 +3,15 @@ using namespace std;
 using namespace zxlib;
 zstmt::zstmt( const char* text ,StmtType stmt_type)
 {
-     m_terms_calculated = false;
-     m_text = zstring(text);
-     m_stmt_type = stmt_type ;
-     m_level = 0;
+     init_from_text(text,stmt_type);
 }
 
 zstmt::zstmt( string& text ,StmtType stmt_type)
+{
+     init_from_text(text.c_str(),stmt_type);
+}
+
+void zstmt::init_from_text( const char* text , StmtType stmt_type )
 {
      m_terms_calculated = false;
      m_text = zstring(text);

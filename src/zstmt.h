@@ -18,6 +18,7 @@ namespace zxlib{
                StmtType m_stmt_type;
                bool m_terms_calculated;
                size_t m_level;
+               void init_from_text( const char* text , StmtType stmt_type );
           public:
 
                zstmt( const char* text ,StmtType stmt_type);

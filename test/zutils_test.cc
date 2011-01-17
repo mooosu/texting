@@ -137,6 +137,8 @@ BOOST_AUTO_TEST_CASE(test_join_isolated_chars)
           {"a bc","abc"},
           {"ab bc","ab bc"},
           {"S PU 索浦","SPU 索浦"},
+          {"畅 e 行","畅e行"},
+          //{"蓝牙 V2.1","蓝牙 V2.1"},
           {"I Tech","ITech"},
           {"CF 卡","CF 卡"},
           {"电水壶 电水瓶","电水壶电水瓶"},

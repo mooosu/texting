@@ -38,6 +38,8 @@ BOOST_AUTO_TEST_CASE(test_get_terms)
      zps.push_back( pair<zpcre, TermType>(unit, Unit) );
      zps.push_back( pair<zpcre, TermType>(term, Matched) );
      zps.push_back( pair<zpcre, TermType>(en, En) );
+
+     char buffer[1024];
      for( size_t i = 0 ;i< sizeof(cases)/sizeof(test_data) ; i++ ){
           zstmt stmt( cases[i].value,SubStmt);
           stmt.parse( filter,zps,zs);
@@ -45,6 +47,8 @@ BOOST_AUTO_TEST_CASE(test_get_terms)
           string_vector tmp;
           for( size_t n =0 ; n < tas.size(); n++){
                tmp.push_back(tas[n].term_text);
+               join_isolated_chars((char*)tas[n].term_text.c_str(),tas[n].term_text.size(),buffer);
+               cout << "term_text: " << buffer << endl;
           }
           string str = zxlib::join(tmp,":");
           BOOST_CHECK_EQUAL(str,string(cases[i].expected));

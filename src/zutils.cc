@@ -1,4 +1,5 @@
-#include "ztexting.h"
+#include "common.h"
+#include "zutils.h"
 
 using namespace std;
 using namespace zxlib;
