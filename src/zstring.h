@@ -1,7 +1,10 @@
 #ifndef _ZSTRING_H_
 #define _ZSTRING_H_
+#include "common.h"
+#include "zterm.h"
+#include "zscws.h"
+#include "zpcre.h"
 
-using namespace std;
 
 namespace zxlib{
      class zstring{

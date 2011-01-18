@@ -1,22 +1,25 @@
 #ifndef _ZPCRE_H_
 #define _ZPCRE_H_
+#include "common.h"
+#include "zterm.h"
+#include "zutils.h"
 
 namespace zxlib {
      class zpcre {
           private:
-               std::string m_expression;
-               std::string m_flags;
+               string m_expression;
+               string m_flags;
                pcrepp::Pcre m_reg;
           public:
                zpcre();
-               zpcre(const std::string &exp);
-               zpcre(const std::string &exp, const std::string &flags);
+               zpcre(const string &exp);
+               zpcre(const string &exp, const string &flags);
                ~zpcre();
                void load_file(const char *filename, const char *flags = "gi");
-               term_array split(const std::string &text, TermType type=Matched);
-               std::string replace(const std::string &text, const std::string &with);
-               std::string remove(const std::string &text);
-               bool match(const std::string &str);
+               term_array split(const string &text, TermType type=Matched);
+               string replace(const string &text, const string &with);
+               string remove(const string &text);
+               bool match(const string &str);
                void study();
                string get_expression(){ return m_expression; }
      };

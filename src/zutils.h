@@ -12,10 +12,10 @@
 namespace zxlib{
      using namespace std;
      unsigned char dbc_utf8( unsigned char *sbc , size_t len);
-     char* znorm(const char* str, size_t len );
+     string znorm(const char* str, size_t len );
      bool file_exists(const char *filename);
      size_t readlines(const char* filename, string_vector& lines );
-     string join(string_vector& strs , const char* chars);
+     string join(const string_array& strs , const char* chars);
      int join_isolated_chars( char * src ,int len, char* dest);
      size_t group_chars(string_vector& strs, size_t size , string_vector& groups );
      size_t find_isolate_chars(string_vector& chars, vector<string_vector>& found);
@@ -29,17 +29,19 @@ namespace zxlib{
 
      using internal::c_join_buffer_size;
      using internal::c_join_buffer;
-     template<std::size_t MaxSize=32*1024>
+
+     template<std::size_t MaxSize=32*1024> 
      class char_joiner{
           private:
-               char* m_string;
+               const char* m_string;
                size_t m_size;
                void init( const char* str,size_t size )
                {
                     m_string = str;
                     m_size = size;
                     if( c_join_buffer_size < size  ){
-                         c_join_buffer_size = size+1;
+                         size_t *p =const_cast < size_t* >(& c_join_buffer_size);
+                         *p = size+1;
                          c_join_buffer.reset( new char[c_join_buffer_size]);
                     }
                     if( c_join_buffer_size >= MaxSize ){
@@ -53,10 +55,11 @@ namespace zxlib{
                char_joiner(string& str ){
                     init(str.c_str(),str.size());
                }
-               char* join(){
-                    join_isolated_chars(m_string,m_size,c_join_buffer.get());
+               const char* join(){
+                    join_isolated_chars((char*)m_string,m_size,c_join_buffer.get());
                     return c_join_buffer.get();
                }
+               static size_t max_size(){ return MaxSize; }
      };
 };
 

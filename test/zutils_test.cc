@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(test_znorm)
      };
      for( size_t k =0 ; k< sizeof(strs)/sizeof(char*) ; k++ ){
           size_t len  = strlen(strs[k]);
-          char* new_str = znorm((char*)strs[k],len);
+          string new_str = znorm((char*)strs[k],len);
           const char* expected = "~!@# % &*()/     }{[]  ?`1234567890-=  ,";
           for( size_t i = 0 ;i < strlen(expected) ; i++ ){
                BOOST_CHECK_EQUAL(new_str[i] , expected[i] );
@@ -164,10 +164,12 @@ BOOST_AUTO_TEST_CASE(test_join_isolated_chars)
      zpcre filter;
      filter.load_file("./src/symbol.txt");
      char buffer[1024];
+     BOOST_CHECK_EQUAL(char_joiner<>::max_size(),32*1024);
+     BOOST_CHECK_EQUAL(char_joiner<333>::max_size(),333);
      for( size_t i =0 ; i < sizeof(cases) / sizeof(test_data ) ; i ++ ){
           char* tmp = (char*)cases[i].value;
           string str= tmp;
-          join_isolated_chars((char*)str.c_str(),str.size(),buffer);
-          BOOST_CHECK_EQUAL(string(buffer),string(cases[i].expected));
+          const char *res = char_joiner<>(str).join();
+          BOOST_CHECK_EQUAL(string(res),string(cases[i].expected));
      }
 }

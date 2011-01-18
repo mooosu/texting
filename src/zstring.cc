@@ -1,13 +1,13 @@
-#include "ztexting.h"
+#include "zstring.h"
 
 using namespace zxlib;
 
 zstring zstring::to_norm(zpcre &filter) const {
-     char* tmp = znorm(m_text.c_str(), m_text.size());
+     string tmp = znorm(m_text.c_str(), m_text.size());
      zstring ret(tmp);
-     free(tmp);
      return zstring( filter.replace(ret.to_string(), " ") ).strip();
 }
+
 zstring zstring::strip() const {
      char* tmp = ztrim(m_text.c_str(), m_text.size());
      return zstring(tmp);
@@ -20,17 +20,11 @@ string zstring::join(const string_array &vec) const {
      else if (vec_len == 1)
           return vec[0];
      else{
-          size_t size = m_text.length() * (vec_len-1);
-          for(size_t i = 0; i < vec_len; i++)
-               size += vec[i].size();
-          string tmp;
-          tmp.reserve(size);
-          tmp = vec[0];
-          for(size_t i = 1; i < vec_len; i++) 
-               tmp += m_text + vec[i];
-          return tmp;
+          return zxlib::join(vec,m_text.c_str());
      }
 }
+
+
 term_array zstring::split_by_regexp(zpcre &zp, const string &str, TermType type) const{
      term_array terms = zp.split(str, type);
      return terms;

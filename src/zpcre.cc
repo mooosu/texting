@@ -1,4 +1,4 @@
-#include "ztexting.h"
+#include "zpcre.h"
 
 using namespace zxlib;
 
@@ -60,7 +60,7 @@ void zpcre::load_file(const char *filename, const char *flags){
      }
      string_array strs;
      readlines(filename, strs);
-     m_expression = "(" + zstring("").join(strs) + ")";
+     m_expression = "(" + zxlib::join(strs,"") + ")";
      m_flags = flags;
      m_reg = pcrepp::Pcre(m_expression, flags);
 }

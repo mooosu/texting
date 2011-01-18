@@ -6,6 +6,7 @@
 using std::string;
 using std::vector;
 using std::exception;
+using std::pair;
 namespace zxlib{
      typedef vector<string> string_vector;
      typedef vector<string> string_array;
