@@ -8,7 +8,7 @@ if STATIC
 ZTEXTING_LIB= ../src/libztexting.a
 endif
 
-noinst_PROGRAMS = zstring_test ztexting_test ztexting_test2 zstmt_test zutils_test
+noinst_PROGRAMS = zstring_test ztexting_test ztexting_test2 zstmt_test zutils_test unicode_test
 
 zstring_test_SOURCES = zstring_test.cc zstrip_test.cc zscws_test.cc zstring_regexp_test.cc zpcre_test.cc
 zstring_test_CXXFLAGS= $(CXXFLAGS)
@@ -32,3 +32,7 @@ zstmt_test_LDADD= $(ZTEXTING_LIB) $(LIBS)
 zutils_test_SOURCES = zutils_test.cc
 zutils_test_CXXFLAGS= $(CXXFLAGS)
 zutils_test_LDADD= $(ZTEXTING_LIB) $(LIBS)
+
+unicode_test_SOURCES = unicode_test.cc
+unicode_test_CXXFLAGS= $(CXXFLAGS)
+unicode_test_LDADD= $(ZTEXTING_LIB) $(LIBS)

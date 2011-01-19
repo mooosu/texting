@@ -1,6 +1,19 @@
 #include "unicode.h"
 using namespace zxlib;
 namespace zxlib{
+
+     size_t  utf8_len(const char* str, size_t size )
+     {
+          size_t len = 0; 
+          const unsigned char *tmp=(const unsigned char*)str; 
+          const unsigned char *end =tmp+size; 
+          while( tmp < end ){ 
+               tmp+= calculate_sequence_length( tmp,end ) ; 
+               len++; 
+          } 
+          return len;
+     }
+
      unsigned calculate_sequence_length( const unsigned char* str,size_t len)
      {
           return calculate_sequence_length(str,str+len);

@@ -20,6 +20,7 @@
 namespace zxlib{
      inline bool bad_cont(unsigned char ch) { return (ch & 0xc0) != 0x80; }
 
+     size_t   utf8_len(const char* str, size_t len );
      unsigned calculate_sequence_length( const unsigned char* str,const unsigned char* end);
      unsigned calculate_sequence_length( const unsigned char* str,size_t len);
      /** An iterator which returns Unicode character values from a UTF-8 encoded
@@ -138,36 +139,36 @@ namespace zxlib{
            *
            *  @return true or false.
            */
-          LEN_COMPARE(<,>=,false,true)
-               /** Check if lenght of str <= given value.
-                *
-                *  @return true or false.
-                */
-               LEN_COMPARE(<=,>,false,true)
-               /** Check if lenght of str > given value.
-                *
-                *  @return true or false.
-                */
-               LEN_COMPARE(>,>,true,false)
-               /** Check if lenght of str >= given value.
-                *
-                *  @return true or false.
-                */
-               LEN_COMPARE(>=,>=,true,false)
-               /** Move forward to the next Unicode character.
-                *
-                *  @return An iterator pointing to the position before the move.
-                */
-               Utf8Iterator operator++(int) {
-                    // If we've not calculated m_seqlen yet, do so.
-                    if (m_seqlen == 0) m_seqlen = calculate_sequence_length( m_str ,m_end);
-                    const unsigned char *old_p = m_str;
-                    unsigned old_seqlen = m_seqlen;
-                    m_str += m_seqlen;
-                    if (m_str == m_end) m_str = NULL;
-                    m_seqlen = 0;
-                    return Utf8Iterator(old_p, m_end, old_seqlen);
-               }
+          LEN_COMPARE(<,>=,false,true);
+          /** Check if lenght of str <= given value.
+           *
+           *  @return true or false.
+           */
+          LEN_COMPARE(<=,>,false,true);
+          /** Check if lenght of str > given value.
+           *
+           *  @return true or false.
+           */
+          LEN_COMPARE(>,>,true,false);
+          /** Check if lenght of str >= given value.
+           *
+           *  @return true or false.
+           */
+          LEN_COMPARE(>=,>=,true,false);
+          /** Move forward to the next Unicode character.
+           *
+           *  @return An iterator pointing to the position before the move.
+           */
+          Utf8Iterator operator++(int) {
+               // If we've not calculated m_seqlen yet, do so.
+               if (m_seqlen == 0) m_seqlen = calculate_sequence_length( m_str ,m_end);
+               const unsigned char *old_p = m_str;
+               unsigned old_seqlen = m_seqlen;
+               m_str += m_seqlen;
+               if (m_str == m_end) m_str = NULL;
+               m_seqlen = 0;
+               return Utf8Iterator(old_p, m_end, old_seqlen);
+          }
 
           /** Move forward to the next Unicode character.
            *

@@ -1,0 +1,4 @@
+- dict_file: test/test_data/dict.short.xdb
+  symbol_file: test/test_data/symbol.txt
+  unit_file: test/test_data/unit.txt
+  en_file: test/test_data/en.txt

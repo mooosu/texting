@@ -19,10 +19,6 @@ BOOST_AUTO_TEST_CASE(is_dbc_utf8)
      memcpy(buffer,"\xc2\xa0",3);
      BOOST_CHECK_EQUAL(zxlib::calculate_sequence_length((const unsigned char*)buffer,2),2);
 }
-BOOST_AUTO_TEST_CASE(test_calculate_sequence_length)
-{
-     BOOST_CHECK_EQUAL(zxlib::calculate_sequence_length((const unsigned char*)"ab",2),1);
-}
 BOOST_AUTO_TEST_CASE(test_znorm)
 {
      
